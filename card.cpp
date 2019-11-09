@@ -19,6 +19,7 @@ Card::Card(int rank, Suit s)
 string Card::toString() const
 {
    string s = rankString(myRank) + suitString(mySuit);
+   return s;
 }
 
 bool Card::sameSuitAs(const Card& c) const
@@ -47,8 +48,7 @@ string Card::suitString(Suit s) const
       case clubs:
 	 return "c";
 	 break;
-      default:
-	 cout << "****invalid suit****" << endl;
+
    }
 }
 
@@ -93,10 +93,8 @@ string Card::rankString(int r) const
          return "Q";
          break;
       case 13:
-	 return "K";
-	 break;
-      default:
-	 cout << "****invalid rank****" << endl;
+	       return "K";
+	       break;
    }
 }
 

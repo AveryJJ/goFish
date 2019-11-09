@@ -5,7 +5,7 @@
 #include "card.h"
 #include "player.h"
 #include "deck.h"
-
+#include <iostream>
 using namespace std;
 
 
@@ -18,20 +18,23 @@ void dealHand(Deck &d, Player &p, int numCards);
 int main( )
 {
     int numCards = 5;
-    
+
     Player p1("Joe");
+    cout << "Joe successfully created" << endl;
     Player p2("Jane");
-    
+    cout << "Jane successfully created" << endl;
+
     Deck d;  //create a deck of cards
+    cout << "Deck made" << endl;
     d.shuffle();
-    
+
     dealHand(d, p1, numCards);
     dealHand(d, p2, numCards);
-       
+
     cout << p1.getName() <<" has : " << p1.showHand() << endl;
     cout << p2.getName() <<" has : " << p2.showHand() << endl;
-    
-    return EXIT_SUCCESS;  
+
+    return EXIT_SUCCESS;
 }
 
 
@@ -41,7 +44,3 @@ void dealHand(Deck &d, Player &p, int numCards)
    for (int i=0; i < numCards; i++)
       p.addCard(d.dealCard());
 }
-   
-
-
-

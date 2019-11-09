@@ -10,19 +10,22 @@ using namespace std;
 Deck::Deck()
 {
    myIndex = 0;
-   Card::Suit currSuit = Card::spades;
+   int currSuit = Card::spades;
    while(currSuit <= Card::clubs)
    {
       for(int i = 1; i <= 13; i++)
       {
-         myCards[i] = Card(i,currSuit);
+         myCards[myIndex] = Card(i,(Card::Suit) currSuit);
+         myIndex++;
       }
+      currSuit++;
    }
+   myIndex--;
 }
 
 void Deck::shuffle()
 {
-   srand(time(0));
+  srand(time(0));
    for(int i=0; i<SIZE; i++)
    {
       int i_rand = 1+(rand()%(SIZE-1));
@@ -32,10 +35,9 @@ void Deck::shuffle()
 
 Card Deck::dealCard()
 {
-//what do I include for a Fail?
    if(this->size() > 0)
    {
-      Card::Card temp = myCards[myIndex];
+      Card temp = myCards[myIndex];
       myIndex--;
       return temp;
    }
@@ -47,8 +49,8 @@ int Deck::size() const
    {
       case 0:
          return myIndex;
-	 break;
-      default:
-	 return myIndex+1;
+	    break;
+         default:
+	       return myIndex+1;
    }
 }
