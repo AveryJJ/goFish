@@ -4,12 +4,20 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <ctime>
 using namespace std;
 
 Deck::Deck()
 {
-
+   myIndex = 0;
+   Card::Suit currSuit = Card::spades;
+   while(currSuit <= Card::clubs)
+   {
+      for(int i = 1; i <= 13; i++)
+      {
+         myCards[i] = Card(i,currSuit);
+      }
+   }
 }
 
 void Deck::shuffle()
@@ -25,9 +33,12 @@ void Deck::shuffle()
 Card Deck::dealCard()
 {
 //what do I include for a Fail?
-   Card temp = myCards[myIndex];
-   myIndex--;
-   return temp;
+   if(this->size() > 0)
+   {
+      Card::Card temp = myCards[myIndex];
+      myIndex--;
+      return temp;
+   }
 }
 
 int Deck::size() const

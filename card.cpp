@@ -6,7 +6,8 @@ using namespace std;
 
 Card::Card()
 {
-
+   myRank = 1;
+   mySuit = spades;
 }
 
 Card::Card(int rank, Suit s)
@@ -17,7 +18,7 @@ Card::Card(int rank, Suit s)
 
 string Card::toString() const
 {
-
+   string s = rankString(myRank) + suitString(mySuit);
 }
 
 bool Card::sameSuitAs(const Card& c) const
@@ -107,4 +108,9 @@ bool Card::operator == (const Card& rhs) const
 bool Card::operator != (const Card& rhs) const
 {
    return((mySuit != rhs.mySuit) && (myRank != rhs.myRank));
+}
+ostream& operator << (ostream& out, const Card& c)
+{
+   out << c.toString() << endl;
+   return out;
 }
