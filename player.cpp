@@ -7,7 +7,7 @@
 #include <ctime>
 #include "player.h"
 #include "card.h"
-
+#include <fstream>
 using namespace std;
 
 Player::Player()
@@ -16,60 +16,60 @@ Player::Player()
 }
 void Player::addCard(Card c)
 {
-	cout << myName << " drew a " << c << endl;
 	myHand.push_back(c);
 }
 void Player::bookCards(Card c1, Card c2)
 {
-   c1 = this->removeCardFromHand(c1);
-   c2 = this->removeCardFromHand(c2);
-	 cout << myName << "creates a book of" << c1.getRank() << "'s" << endl;
 	 myBook.push_back(c1);
 	 myBook.push_back(c2);
 }
 bool Player::checkHandForBook(Card &c1, Card &c2)
 {
-	 for(vector<Card>::iterator it = myHand.begin(); it != myHand.end();++it)
-	 {
-      for(vector<Card>::iterator it_next = it+1; it != myHand.end();++it)
-      {
-         if(it->getRank() == it_next->getRank())
+   vector<Card>::iterator it = myHand.begin();
+   vector<Card>::iterator it_next = myHand.begin();
+   for(it = myHand.begin(); it != myHand.end(); ++it)
+   {
+	    for(it_next = it + 1; it_next != myHand.end(); ++it_next)
+			{
+		     if (it->getRank() == it_next->getRank())
 				 {
-				    c1 = *it;
-						c2 = *it_next;
-
-						return true;
-				 }
-      }
+			      c1 = *it;
+			      c2 = *it_next;
+			      return true;
+		     }
+	    }
    }
-	 return false;
+   return false;
 }
 //bool Player::rankInHand(Card c) const;
 Card Player::chooseCardFromHand() const
 {
-   return (myHand[rand() % myHand.size()]);
+   return myHand[rand() % myHand.size()];
 }
 bool Player::cardInHand(Card c) const
 {
-   for(vector<Card>::const_iterator it = myHand.begin(); it != myHand.end(); ++it)
-   {
-      if(c == *it)
-      {
-         return true;
-      }
+   vector<Card>::const_iterator it = myHand.begin();
+   for(it = myHand.begin(); it != myHand.end(); ++it)
+	 {
+	    if(it->getRank() == c.getRank())
+			{
+		     return true;
+	    }
    }
+   return false;
 }
 Card Player::removeCardFromHand(Card c)
 {
-	for(vector<Card>::iterator it = myHand.begin(); it != myHand.end(); ++it)
-	{
-		 if(c.getRank() == it->getRank())
-		 {
-			  Card temp = *it;
-				myHand.erase(it); //Erases card from hand. this is a standard function.
-				return temp;
-		 }
-	}
+   vector<Card>::iterator it = myHand.begin();
+   for(it = myHand.begin(); it != myHand.end(); ++it)
+   {
+	    if (it->getRank() == c.getRank())
+			{
+		     Card temp = *it;
+		     myHand.erase(it);
+		     return temp;
+	    }
+   }
 }
 string Player::showHand() const
 {
@@ -90,18 +90,19 @@ string Player::showHand() const
 string Player::showBooks() const
 {
    string s_book;
-	 for(vector<Card>::const_iterator it = myHand.begin(); it != myHand.end(); ++it)
+   vector<Card>::const_iterator it = myHand.begin();
+   for(it = myBook.begin(); it != myBook.end(); ++it)
 	 {
-		  if(it == myHand.begin())
+	    if(it == myHand.begin())
 		  {
 			   s_book = it->toString();
 		  }
 		  else
 		  {
 			   s_book = s_book + ", " + it->toString();
-	    }
-	 }
-	 return s_book;
+		  }
+   }
+   return s_book;
 }
 int Player::getHandSize() const
 {
@@ -109,20 +110,18 @@ int Player::getHandSize() const
 }
 int Player::getBookSize() const
 {
-   return myBook.size();
+   return ((myBook.size())/2);
 }
 //bool Player::checkHandForPair(Card &c1, Card &c2);
 bool Player::sameRankInHand(Card c) const
 {
-   for(vector<Card>::const_iterator it = myHand.begin(); it != myHand.end();++it)
+   vector<Card>::const_iterator it = myHand.begin();
+   for(it = myHand.begin(); it != myHand.end(); ++it)
 	 {
-	    if(c.getRank() == it->getRank())
-		  {
-				return true;
-		  }
-		  else
-		  {
-				return false;
-		 }
-	}
+	    if(it->getRank() == c.getRank())
+			{
+		     return true;
+	    }
+   }
+   return false;
 }

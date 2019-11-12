@@ -1,7 +1,7 @@
-final: card_demo.o player.o deck.o card.o
-	g++ -o test card_demo.o player.o deck.o card.o
-card_demo.o: card_demo.cpp card.h deck.h player.h
-	g++ -c card_demo.cpp
+final: go_fish.o player.o deck.o card.o
+	g++ -o test go_fish.o player.o deck.o card.o
+go_fish.o: go_fish.cpp card.h deck.h player.h
+	g++ -c go_fish.cpp
 player.o: player.cpp player.h deck.h card.h
 	g++ -c player.cpp
 deck.o: deck.cpp deck.h card.h

@@ -38,17 +38,16 @@ string Card::suitString(Suit s) const
    {
       case spades:
          return "s";
-	 break;
+	       break;
       case hearts:
-	 return "h";
-	 break;
+	       return "h";
+	        break;
       case diamonds:
-	 return "d";
-	 break;
+	       return "d";
+	       break;
       case clubs:
-	 return "c";
-	 break;
-
+	       return "c";
+	       break;
    }
 }
 
@@ -109,6 +108,6 @@ bool Card::operator != (const Card& rhs) const
 }
 ostream& operator << (ostream& out, const Card& c)
 {
-   out << c.toString() << endl;
+   out << c.toString();
    return out;
 }

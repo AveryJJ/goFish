@@ -25,7 +25,7 @@ Deck::Deck()
 
 void Deck::shuffle()
 {
-  srand(time(0));
+   srand(time(0));
    for(int i=0; i<SIZE; i++)
    {
       int i_rand = 1+(rand()%(SIZE-1));
@@ -45,12 +45,5 @@ Card Deck::dealCard()
 
 int Deck::size() const
 {
-   switch (myIndex)
-   {
-      case 0:
-         return myIndex;
-	    break;
-         default:
-	       return myIndex+1;
-   }
+   return myIndex+1;
 }
